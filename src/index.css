@@ -363,16 +363,16 @@ main .item .item-price-btn{
     justify-content: center;
 }
 
-main .item .item-price-btn:hover{
+main .item .in-order{
     background-color: #1460B3;
     color: white
 }
 
-.full-item .item-price-btn:hover{
+/* .full-item .item-price-btn:hover{
     background-color: white;
     color: #1460B3;
     border: 1px solid #1460B3;
-}
+} */
 
 .full-item .exit-btn{
     background-color: #1C1C1C;
