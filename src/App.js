@@ -22,11 +22,8 @@ const App = () => {
       .then(data=>{
         setItems(data.data);
       })
-  }, []);
-
-  useEffect(() => {
     chooseCategory();
-  }, [items]);
+  }, []);
   
   const chooseCategory = (category='all') => {
     if(category==='all'){
@@ -37,11 +34,125 @@ const App = () => {
     const newCurrentItems = copy.filter(el => el.category === category)
     setCurrentItems(newCurrentItems)
   }
+  // const [items, setItems] = useState([{
+  //       id: 1,
+  //       title: 'Ханский плов с казы 1 кг',
+  //       img: 'plovskazy.jpg',
+  //       weight: '1000 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер. Завершает блюдо ароматы чеснока и зиры.',
+  //       category: 'plov',
+  //       price: 6590
+  //     },
+  //     {
+  //       id: 2,
+  //       title: 'Праздничный плов 1 кг',
+  //       img: 'plov2.jpg',
+  //       weight: '1000 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер. Завершает блюдо ароматы чеснока и зиры.',
+  //       category: 'plov',
+  //       price: 4990,
+  //     },
+  //     {
+  //       id: 3,
+  //       title: 'Чайханский плов 1кг',
+  //       img: 'plov3.jpg',
+  //       weight: '1000 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер. Завершает блюдо ароматы чеснока и зиры.',
+  //       category: 'firstfood',
+  //       price: 4990
+  //     },
+  //     {
+  //       id: 4,
+  //       title: 'Праздничный плов 1 порц',
+  //       img: 'plovskazy.jpg',
+  //       weight: '450 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер. Завершает блюдо ароматы чеснока и зиры.',
+  //       category: 'secondfood',
+  //       price: 2790
+  //     },
+  //     {
+  //       id: 5,
+  //       title: 'Чайханский плов 1 порц',
+  //       img: 'plov2.jpg',
+  //       weight: '450 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер. Завершает блюдо ароматы чеснока и зиры.',
+  //       category: 'salaty',
+  //       price: 2790
+  //     },
+  //     {
+  //       id: 6,
+  //       title: 'Ханский плов с казы 1 порц',
+  //       img: 'plov3.jpg',
+  //       weight: '450 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер. Завершает блюдо ароматы чеснока и зиры.',
+  //       category: 'zakuski',
+  //       price: 3790
+  //     },
+  //     {
+  //       id: 7,
+  //       title: 'Мясное ассорти доставка',
+  //       img: 'nakompaniyu.jpg',
+  //       weight: '2841 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер. Завершает блюдо ароматы чеснока и зиры.',
+  //       category: 'napitki',
+  //       price: 37900
+  //     },
+  //     {
+  //       id: 8,
+  //       title: 'Куриные ассорти доставка',
+  //       img: 'nakompaniyu2.jpg',
+  //       weight: '3032 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер. Завершает блюдо ароматы чеснока и зиры.',
+  //       category: 'deserty',
+  //       price: 19900
+  //     },
+  //     {
+  //       id: 9,
+  //       title: 'Куырдак',
+  //       img: 'nakompaniyu3.jpg',
+  //       weight: '3274 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер. Завершает блюдо ароматы чеснока и зиры.',
+  //       category: 'plov',
+  //       price: 20490
+  //     },
+  //     {
+  //       id: 10,
+  //       title: 'Дапанджи с тестом',
+  //       img: 'nakompaniyu.jpg',
+  //       weight: '3274 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер. Завершает блюдо ароматы чеснока и зиры.',
+  //       category: 'firstfood',
+  //       price: 20290
+  //     },
+  //     {
+  //       id: 11,
+  //       title: 'Сырне из говядины',
+  //       img: 'nakompaniyu2.jpg',
+  //       weight: '3274 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер.',
+  //       category: 'secondfood',
+  //       price: 21390
+  //     },
+  //     {
+  //       id: 12,
+  //       title: 'Сырне из баранины',
+  //       img: 'nakompaniyu3.jpg',
+  //       weight: '3274 г',
+  //       describe: 'Необыкновенный темный пряный плов с насыщенным вкусом специй из сорта риса лазер.',
+  //       category: 'salaty',
+  //       price: 22490
+  //     },
+  // ]
+  // )
 
   const onShowItem = (item) => {
     setFullItem(item)
     setShowFullItem(!showFullItem)
   }
+
+  // useEffect(() => {
+  //   chooseCategory()
+  // },[])
 
   const deleteOrder = (id) => {
 
@@ -87,9 +198,17 @@ const App = () => {
     }    
   }
 
-  const checkItemInOrders = (itemId) => {
-    return orders.some((orderItem) => orderItem.id === itemId); // Replace 'id' with the unique identifier in your item object
-  };
+  const postFunction = (id, quantity) => {
+    let body={
+      product_id: id,
+      quantity: quantity
+    }
+
+    axios.post(`http://b2b.croissantgallery.kz/api/v1/b2b/orders/`, { body })
+      .then(response => {
+        console.log(response.data);
+      });
+  }
 
   const numberWithSpaces=(x)=> {
     var parts = x.toString().split(".");
@@ -99,12 +218,12 @@ const App = () => {
 
     return (
       <div className="App">
-        <Header deleteOrder={deleteOrder} addToOrder={addToOrder} orders={orders} deleteAllOrders={deleteAllOrders} numberWithSpaces={numberWithSpaces}/>
+        <Header postFunction={postFunction} deleteOrder={deleteOrder} addToOrder={addToOrder} orders={orders} deleteAllOrders={deleteAllOrders} numberWithSpaces={numberWithSpaces}/>
         <div className='main'>
           <div className='container'>
             <div className='itemList'>
               <Categories chooseCategory={chooseCategory}/>
-              <Items  onShowItem={onShowItem} checkItemInOrders={checkItemInOrders} items={currentItems} onAdd={addToOrder} numberWithSpaces={numberWithSpaces}/>  
+              <Items  onShowItem={onShowItem} items={currentItems} onAdd={addToOrder} numberWithSpaces={numberWithSpaces}/>  
               {showFullItem && <ShowFullItem onAdd={addToOrder} onShowItem={onShowItem} item={fullItem}/>}          
             </div>
           </div>

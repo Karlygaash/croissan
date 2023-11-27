@@ -20,7 +20,7 @@ const showOrders=(props)=>{
           <b className="desc__orders-sum">{props.numberWithSpaces(summa)}&nbsp;₸</b>
         </div>
       </div>
-      <p className="summa">Оплатить и заказать<p>{props.numberWithSpaces(summa)}&nbsp;₸</p></p>
+      <p onClick={()=>props.postFunction(props.orders.id,props.orders.count)} className="summa">Оплатить и заказать<p>{props.numberWithSpaces(summa)}&nbsp;₸</p></p>
     </div>
   )
 }
