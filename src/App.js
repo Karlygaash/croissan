@@ -198,6 +198,18 @@ const App = () => {
     }    
   }
 
+  const postFunction = (id, quantity) => {
+    let body={
+      product_id: id,
+      quantity: quantity
+    }
+
+    axios.post(`http://b2b.croissantgallery.kz/api/v1/b2b/orders/`, { body })
+      .then(response => {
+        console.log(response.data);
+      });
+  }
+
   const numberWithSpaces=(x)=> {
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
@@ -206,7 +218,7 @@ const App = () => {
 
     return (
       <div className="App">
-        <Header deleteOrder={deleteOrder} addToOrder={addToOrder} orders={orders} deleteAllOrders={deleteAllOrders} numberWithSpaces={numberWithSpaces}/>
+        <Header postFunction={postFunction} deleteOrder={deleteOrder} addToOrder={addToOrder} orders={orders} deleteAllOrders={deleteAllOrders} numberWithSpaces={numberWithSpaces}/>
         <div className='main'>
           <div className='container'>
             <div className='itemList'>
