@@ -5,8 +5,9 @@ import Header from './components/Header'
 import Categories from './components/Categories';
 import ShowFullItem from './components/ShowFullItem';
 import axios from 'axios';
-
-const src="https://655d92919f1e1093c5997fda.mockapi.io/api/v1/products/"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import getApiUrl from './apiConfig';
 
 const App = () => {
 
@@ -15,16 +16,21 @@ const App = () => {
   const [orders, setOrders] = useState([])
   const [fullItem, setFullItem] = useState(null)
   const [showFullItem, setShowFullItem] = useState(false)
+  const [categories, setCategories] = useState([]);
+  const apiUrl = getApiUrl();
+  const customerCodeWithSlashes = window.location.pathname;
+  const customerCode = customerCodeWithSlashes.replace(/^\/|\/$/g, '');
 
   useEffect(()=>{
     axios
-      .get(src)
+      .get(`${apiUrl}/${customerCode}/products/`)
       .then(data=>{
         setItems(data.data);
       })
   }, []);
 
   useEffect(() => {
+    getCategories();
     chooseCategory();
   }, [items]);
   
@@ -37,6 +43,12 @@ const App = () => {
     const newCurrentItems = copy.filter(el => el.category === category)
     setCurrentItems(newCurrentItems)
   }
+
+  const getCategories = () => {
+    const uniqueCategories = ['All', ...new Set(items.map((item) => item.category))]
+    .map((category) => ({ key: category === 'All' ? 'all' : category, name: category === 'All' ? 'Все' : category }));
+    setCategories(uniqueCategories);
+  };
 
   const onShowItem = (item) => {
     setFullItem(item)
@@ -99,12 +111,18 @@ const App = () => {
 
     return (
       <div className="App">
+        <ToastContainer />
         <Header deleteOrder={deleteOrder} addToOrder={addToOrder} orders={orders} deleteAllOrders={deleteAllOrders} numberWithSpaces={numberWithSpaces}/>
         <div className='main'>
           <div className='container'>
             <div className='itemList'>
-              <Categories chooseCategory={chooseCategory}/>
-              <Items  onShowItem={onShowItem} checkItemInOrders={checkItemInOrders} items={currentItems} onAdd={addToOrder} numberWithSpaces={numberWithSpaces}/>  
+              <Categories chooseCategory={chooseCategory} categories={categories}/>
+              <Items
+                onShowItem={onShowItem} 
+                checkItemInOrders={checkItemInOrders} 
+                items={currentItems} onAdd={addToOrder} 
+                numberWithSpaces={numberWithSpaces}
+              />  
               {showFullItem && <ShowFullItem onAdd={addToOrder} onShowItem={onShowItem} item={fullItem}/>}          
             </div>
           </div>

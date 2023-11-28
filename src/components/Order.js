@@ -4,10 +4,9 @@ export class Order extends Component {
   render() {
     return (
       <div className='item'>
-            <img src={"./img/"+this.props.item.img}/>
+            <img src={this.props.item.image} alt={this.props.item.name}/>
             <div className='item-titles'>
-                <h5>{this.props.item.title}</h5>
-                <p>{this.props.item.weight}</p>           
+                <h5>{this.props.item.name}</h5>      
                 <b className='item-price'>{this.props.numberWithSpaces(this.props.item.count * this.props.item.price)}&nbsp;₸</b>
             </div>
             <div className='item-count'>

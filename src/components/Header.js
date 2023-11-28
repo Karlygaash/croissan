@@ -2,12 +2,54 @@ import { FaShoppingCart } from "react-icons/fa";
 import React, {useState} from "react"
 import '../index.css'
 import Order from "./Order"
+import axios from 'axios';
 import { FiX } from "react-icons/fi";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import getApiUrl from '../apiConfig'
 
 
 const showOrders=(props)=>{
+  const apiUrl = getApiUrl();
+  const customerCodeWithSlashes = window.location.pathname;
+  const customerCode = customerCodeWithSlashes.replace(/^\/|\/$/g, '');
+
   let summa=0
   props.orders.forEach(el=>summa += (Number.parseFloat(el.price) * el.count ) )
+
+  const extractOrderData = () => {
+    return props.orders.map(({ id, count }) => ({ 'product_id': id, 'quantity': count }));
+  };
+
+  const sendOrderToServer = () => {
+    const orderData = extractOrderData();
+    const orderUrl = `${apiUrl}/${customerCode}/orders/`;
+
+    axios.post(orderUrl, orderData)
+      .then(response => {
+        props.deleteAllOrders()
+        toast.success('Заказ успешно создан!', {
+          position: 'top-right',
+          autoClose: 3000, // 3 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      })
+      .catch(error => {
+        console.log(error)
+        toast.error('Ошибка. Заказ не создан', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      });
+  };
+
   return (
     <div>
       {props.orders.map(el=>(
@@ -20,7 +62,7 @@ const showOrders=(props)=>{
           <b className="desc__orders-sum">{props.numberWithSpaces(summa)}&nbsp;₸</b>
         </div>
       </div>
-      <p className="summa">Оплатить и заказать<p>{props.numberWithSpaces(summa)}&nbsp;₸</p></p>
+      <button onClick={sendOrderToServer} className="summa">Заказать {props.numberWithSpaces(summa)}&nbsp;₸</button>
     </div>
   )
 }
@@ -34,15 +76,14 @@ const showNothing=()=>{
 }
 
 export default function Header(props){
-    let [cartOpen,setCartOpen] = useState(false);
-
+    let [cartOpen, setCartOpen] = useState(false);
     return(
         <header className="header">
           <div className="header__container">
             <div className="header__row">
               <div></div>
               <div className="header__logo">
-                Rumi
+                Croissant Gallery
               </div>
               <div className="header__icons">
                 <FaShoppingCart onClick={()=>setCartOpen(cartOpen=!cartOpen)} className={`header__icon-bag ${cartOpen &&'active'} ${props.orders.length>0 &&'active'}`}/>

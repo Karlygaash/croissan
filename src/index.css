@@ -56,7 +56,7 @@ body{
 }
 
 .header__icon-bag:hover, .header__icon-bag.active{
-    color: #1460B3BF;
+    color: #1460B3;
 }
 
 header .shop-cart{
@@ -141,7 +141,7 @@ header .shop-cart .item .item-titles{
 .header__logo{
     font-family: cursive;
     font-size: 35px;
-    color:#0767FD;
+    color: #1460B3;
 }
 
 header .shop-cart .empty h2{
@@ -419,7 +419,6 @@ main .item .item-price-btn .plus,
     }
 
     header .header__icon-bag{
-        position: fixed;
         z-index: 100000;
         background-color: white;
         transform: scale(1.1);
